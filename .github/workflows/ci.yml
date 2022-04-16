@@ -37,7 +37,13 @@ jobs:
           paths_ignore: '["**.md", "**.png", "**.jpg"]'
           do_not_skip: '["workflow_dispatch", "schedule", "push"]'
 
-
+  set-version:
+    runs-on: ubuntu-18.04
+    steps:  
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+        
   lint:
     runs-on: ubuntu-18.04
     needs: detect-noop
