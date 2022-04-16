@@ -22,7 +22,7 @@ env:
   BUILD_REGISTRY: ${{ secrets.BUILD_REGISTRY }}
   DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
   REGISTRY_ORGS: ${{ secrets.REGISTRY_ORGS }}
-
+ 
 jobs:
   detect-noop:
     runs-on: ubuntu-18.04
