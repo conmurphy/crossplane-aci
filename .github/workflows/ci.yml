@@ -37,13 +37,13 @@ jobs:
           paths_ignore: '["**.md", "**.png", "**.jpg"]'
           do_not_skip: '["workflow_dispatch", "schedule", "push"]'
 
-  set-version:
+  get_version:
     runs-on: ubuntu-18.04
     steps:  
       - name: Get the version
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-        
+
   lint:
     runs-on: ubuntu-18.04
     needs: detect-noop
@@ -251,7 +251,9 @@ jobs:
     runs-on: ubuntu-18.04
     needs: detect-noop
     if: needs.detect-noop.outputs.noop != 'true'
-
+    env: 
+      ${{ steps.get_version.outputs.VERSION }}
+      
     steps:
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v1
