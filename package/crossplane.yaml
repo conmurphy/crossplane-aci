@@ -4,4 +4,4 @@ metadata:
   name: provider-jet-aci
 spec:
   controller:
-    image: conmurphy/provider-jet-aci-controller:0.0.7
+    image: conmurphy/provider-jet-aci-controller:v0.0.8
