@@ -37,13 +37,6 @@ jobs:
           paths_ignore: '["**.md", "**.png", "**.jpg"]'
           do_not_skip: '["workflow_dispatch", "schedule", "push"]'
 
-  get_version:
-    runs-on: ubuntu-18.04
-    steps:  
-      - name: Get the version
-        id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-
   lint:
     runs-on: ubuntu-18.04
     needs: detect-noop
@@ -251,10 +244,12 @@ jobs:
     runs-on: ubuntu-18.04
     needs: detect-noop
     if: needs.detect-noop.outputs.noop != 'true'
-    env: 
-      ${{ steps.get_version.outputs.VERSION }}
-      
+ 
     steps:
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v1
         with:
@@ -306,6 +301,7 @@ jobs:
           # We're using docker buildx, which doesn't actually load the images it
           # builds by default. Specifying --load does so.
           BUILD_ARGS: "--load"
+          VERSION: ${{ steps.get_version.outputs.VERSION }}
       
       - name: Publish Artifacts to GitHub
         uses: actions/upload-artifact@v2
