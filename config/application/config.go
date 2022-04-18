@@ -54,7 +54,7 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aci_endpoint_security_group_tag_selector", func(r *config.Resource) {
-		r.ShortGroup = "applicationss"
+		r.ShortGroup = "applications"
 		r.Kind = "EsgTagSelector"
 		r.References["endpoint_security_group_dn"] = config.Reference{
 			Type: "Esg",
