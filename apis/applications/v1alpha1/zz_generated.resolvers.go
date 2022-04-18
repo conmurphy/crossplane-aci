@@ -257,6 +257,32 @@ func (mg *EsgSelector) ResolveReferences(ctx context.Context, c client.Reader) e
 	return nil
 }
 
+// ResolveReferences of this EsgTagSelector.
+func (mg *EsgTagSelector) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EndpointSecurityGroupDn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.EndpointSecurityGroupDnRef,
+		Selector:     mg.Spec.ForProvider.EndpointSecurityGroupDnSelector,
+		To: reference.To{
+			List:    &EsgList{},
+			Managed: &Esg{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.EndpointSecurityGroupDn")
+	}
+	mg.Spec.ForProvider.EndpointSecurityGroupDn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EndpointSecurityGroupDnRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Filter.
 func (mg *Filter) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

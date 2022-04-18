@@ -28,11 +28,11 @@ import (
 	esg "github.com/crossplane-contrib/provider-jet-aci/internal/controller/applications/esg"
 	esgepgselector "github.com/crossplane-contrib/provider-jet-aci/internal/controller/applications/esgepgselector"
 	esgselector "github.com/crossplane-contrib/provider-jet-aci/internal/controller/applications/esgselector"
+	esgtagselector "github.com/crossplane-contrib/provider-jet-aci/internal/controller/applications/esgtagselector"
 	filter "github.com/crossplane-contrib/provider-jet-aci/internal/controller/applications/filter"
 	filterentry "github.com/crossplane-contrib/provider-jet-aci/internal/controller/applications/filterentry"
 	importedcontract "github.com/crossplane-contrib/provider-jet-aci/internal/controller/applications/importedcontract"
 	taboocontract "github.com/crossplane-contrib/provider-jet-aci/internal/controller/applications/taboocontract"
-	esgtagselector "github.com/crossplane-contrib/provider-jet-aci/internal/controller/applicationss/esgtagselector"
 	bridgedomain "github.com/crossplane-contrib/provider-jet-aci/internal/controller/networks/bridgedomain"
 	l3externalnetworkinstanceprofile "github.com/crossplane-contrib/provider-jet-aci/internal/controller/networks/l3externalnetworkinstanceprofile"
 	l3externalsubnet "github.com/crossplane-contrib/provider-jet-aci/internal/controller/networks/l3externalsubnet"
@@ -55,11 +55,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		esg.Setup,
 		esgepgselector.Setup,
 		esgselector.Setup,
+		esgtagselector.Setup,
 		filter.Setup,
 		filterentry.Setup,
 		importedcontract.Setup,
 		taboocontract.Setup,
-		esgtagselector.Setup,
 		bridgedomain.Setup,
 		l3externalnetworkinstanceprofile.Setup,
 		l3externalsubnet.Setup,
