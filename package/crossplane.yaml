@@ -4,16 +4,4 @@ metadata:
   name: conmurphy-provider-jet-aci
 spec:
   controller:
-    image: conmurphy/provider-jet-aci-controller:v0.0.14
-
---- 
-apiVersion: meta.pkg.crossplane.io/v1alpha1
-kind: Configuration
-metadata:
-  name: conmurphy-provider-jet-aci
-spec:
-  crossplane:
-    version: ">=v1.0.0"
-  dependsOn:
-    - provider: conmurphy/provider-jet-aci-controller:v0.0.14
-      version: ">=v0.0.1"
+    image: conmurphy/provider-jet-aci-controller:v0.0.15
