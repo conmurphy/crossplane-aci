@@ -4,7 +4,7 @@ metadata:
   name: conmurphy-provider-jet-aci
 spec:
   controller:
-    image: conmurphy/provider-jet-aci-controller:v0.0.11
+    image: conmurphy/provider-jet-aci-controller:v0.0.12
     permissionRequests:
     - apiGroups:
       - apiextensions.crossplane.io

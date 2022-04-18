@@ -92,7 +92,7 @@ func GetProvider() *tjconfig.Provider {
 			// "aci_l3out_static_route_next_hop$",
 			// "aci_l3out_vpc_member$",
 
-			//Access Policies
+			// Access Policies
 			// "aci_access_generic$",
 			// "aci_access_group$",
 			// "aci_access_port_block$",
