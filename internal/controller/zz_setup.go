@@ -21,19 +21,25 @@ import (
 
 	"github.com/crossplane/terrajet/pkg/controller"
 
-	applicationprofile "github.com/crossplane-contrib/provider-jet-aci/internal/controller/application/applicationprofile"
-	epg "github.com/crossplane-contrib/provider-jet-aci/internal/controller/application/epg"
-	esg "github.com/crossplane-contrib/provider-jet-aci/internal/controller/application/esg"
-	esgepgselector "github.com/crossplane-contrib/provider-jet-aci/internal/controller/application/esgepgselector"
-	esgselector "github.com/crossplane-contrib/provider-jet-aci/internal/controller/application/esgselector"
-	esgtagselector "github.com/crossplane-contrib/provider-jet-aci/internal/controller/application/esgtagselector"
-	bridgedomain "github.com/crossplane-contrib/provider-jet-aci/internal/controller/network/bridgedomain"
-	l3externalnetworkinstanceprofile "github.com/crossplane-contrib/provider-jet-aci/internal/controller/network/l3externalnetworkinstanceprofile"
-	l3externalsubnet "github.com/crossplane-contrib/provider-jet-aci/internal/controller/network/l3externalsubnet"
-	l3logicalinterfaceprofile "github.com/crossplane-contrib/provider-jet-aci/internal/controller/network/l3logicalinterfaceprofile"
-	l3logicalnodeprofile "github.com/crossplane-contrib/provider-jet-aci/internal/controller/network/l3logicalnodeprofile"
-	l3outside "github.com/crossplane-contrib/provider-jet-aci/internal/controller/network/l3outside"
-	vrf "github.com/crossplane-contrib/provider-jet-aci/internal/controller/network/vrf"
+	applicationprofile "github.com/crossplane-contrib/provider-jet-aci/internal/controller/applications/applicationprofile"
+	contract "github.com/crossplane-contrib/provider-jet-aci/internal/controller/applications/contract"
+	contractsubject "github.com/crossplane-contrib/provider-jet-aci/internal/controller/applications/contractsubject"
+	epg "github.com/crossplane-contrib/provider-jet-aci/internal/controller/applications/epg"
+	esg "github.com/crossplane-contrib/provider-jet-aci/internal/controller/applications/esg"
+	esgepgselector "github.com/crossplane-contrib/provider-jet-aci/internal/controller/applications/esgepgselector"
+	esgselector "github.com/crossplane-contrib/provider-jet-aci/internal/controller/applications/esgselector"
+	filter "github.com/crossplane-contrib/provider-jet-aci/internal/controller/applications/filter"
+	filterentry "github.com/crossplane-contrib/provider-jet-aci/internal/controller/applications/filterentry"
+	importedcontract "github.com/crossplane-contrib/provider-jet-aci/internal/controller/applications/importedcontract"
+	taboocontract "github.com/crossplane-contrib/provider-jet-aci/internal/controller/applications/taboocontract"
+	esgtagselector "github.com/crossplane-contrib/provider-jet-aci/internal/controller/applicationss/esgtagselector"
+	bridgedomain "github.com/crossplane-contrib/provider-jet-aci/internal/controller/networks/bridgedomain"
+	l3externalnetworkinstanceprofile "github.com/crossplane-contrib/provider-jet-aci/internal/controller/networks/l3externalnetworkinstanceprofile"
+	l3externalsubnet "github.com/crossplane-contrib/provider-jet-aci/internal/controller/networks/l3externalsubnet"
+	l3logicalinterfaceprofile "github.com/crossplane-contrib/provider-jet-aci/internal/controller/networks/l3logicalinterfaceprofile"
+	l3logicalnodeprofile "github.com/crossplane-contrib/provider-jet-aci/internal/controller/networks/l3logicalnodeprofile"
+	l3outside "github.com/crossplane-contrib/provider-jet-aci/internal/controller/networks/l3outside"
+	vrf "github.com/crossplane-contrib/provider-jet-aci/internal/controller/networks/vrf"
 	providerconfig "github.com/crossplane-contrib/provider-jet-aci/internal/controller/providerconfig"
 	tenant "github.com/crossplane-contrib/provider-jet-aci/internal/controller/root/tenant"
 )
@@ -43,10 +49,16 @@ import (
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		applicationprofile.Setup,
+		contract.Setup,
+		contractsubject.Setup,
 		epg.Setup,
 		esg.Setup,
 		esgepgselector.Setup,
 		esgselector.Setup,
+		filter.Setup,
+		filterentry.Setup,
+		importedcontract.Setup,
+		taboocontract.Setup,
 		esgtagselector.Setup,
 		bridgedomain.Setup,
 		l3externalnetworkinstanceprofile.Setup,

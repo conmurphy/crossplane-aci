@@ -1,7 +1,19 @@
 apiVersion: meta.pkg.crossplane.io/v1alpha1
 kind: Provider
 metadata:
-  name: provider-jet-aci
+  name: conmurphy-provider-jet-aci
 spec:
   controller:
     image: conmurphy/provider-jet-aci-controller:v0.0.8
+    permissionRequests:
+    - apiGroups:
+      - apiextensions.crossplane.io
+      resources:
+      - compositions
+      verbs:
+      - get
+      - list
+      - create
+      - update
+      - patch
+      - watch
