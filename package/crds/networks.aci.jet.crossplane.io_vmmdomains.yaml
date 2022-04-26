@@ -1,0 +1,232 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.8.0
+  creationTimestamp: null
+  name: vmmdomains.networks.aci.jet.crossplane.io
+spec:
+  group: networks.aci.jet.crossplane.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - acijet
+    kind: VmmDomain
+    listKind: VmmDomainList
+    plural: vmmdomains
+    singular: vmmdomain
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: VmmDomain is the Schema for the VmmDomains API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: VmmDomainSpec defines the desired state of VmmDomain
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: DeletionPolicy specifies what will happen to the underlying
+                  external when this managed resource is deleted - either "Delete"
+                  or "Orphan" the external resource.
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  accessMode:
+                    type: string
+                  annotation:
+                    type: string
+                  arpLearning:
+                    type: string
+                  aveTimeOut:
+                    type: string
+                  configInfraPg:
+                    type: string
+                  ctrlKnob:
+                    type: string
+                  delimiter:
+                    type: string
+                  enableAve:
+                    type: string
+                  enableTag:
+                    type: string
+                  encapMode:
+                    type: string
+                  enfPref:
+                    type: string
+                  epInventoryType:
+                    type: string
+                  epRetTime:
+                    type: string
+                  hvAvailMonitor:
+                    type: string
+                  mcastAddr:
+                    type: string
+                  mode:
+                    type: string
+                  name:
+                    type: string
+                  nameAlias:
+                    type: string
+                  prefEncapMode:
+                    type: string
+                  providerProfileDn:
+                    type: string
+                  relationInfraRsDomVxlanNsDef:
+                    type: string
+                  relationInfraRsVipAddrNs:
+                    type: string
+                  relationInfraRsVlanNs:
+                    type: string
+                  relationInfraRsVlanNsDef:
+                    type: string
+                  relationVmmRsDefaultCdpIfPol:
+                    type: string
+                  relationVmmRsDefaultFwPol:
+                    type: string
+                  relationVmmRsDefaultL2InstPol:
+                    type: string
+                  relationVmmRsDefaultLacpLagPol:
+                    type: string
+                  relationVmmRsDefaultLldpIfPol:
+                    type: string
+                  relationVmmRsDefaultStpIfPol:
+                    type: string
+                  relationVmmRsDomMcastAddrNs:
+                    type: string
+                  relationVmmRsPrefEnhancedLagPol:
+                    type: string
+                required:
+                - name
+                - providerProfileDn
+                type: object
+              providerConfigRef:
+                default:
+                  name: default
+                description: ProviderConfigReference specifies how the provider that
+                  will be used to create, observe, update, and delete this managed
+                  resource should be configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - name
+                type: object
+              providerRef:
+                description: 'ProviderReference specifies the provider that will be
+                  used to create, observe, update, and delete this managed resource.
+                  Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`'
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: WriteConnectionSecretToReference specifies the namespace
+                  and name of a Secret to which any connection details for this managed
+                  resource should be written. Connection details frequently include
+                  the endpoint, username, and password required to connect to the
+                  managed resource.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+          status:
+            description: VmmDomainStatus defines the observed state of VmmDomain.
+            properties:
+              atProvider:
+                properties:
+                  id:
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: LastTransitionTime is the last time this condition
+                        transitioned from one status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: A Message containing details about this condition's
+                        last transition from one status to another, if any.
+                      type: string
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: Type of this condition. At most one of each condition
+                        type may apply to a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

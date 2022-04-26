@@ -66,15 +66,23 @@ func GetProvider() *tjconfig.Provider {
 			"aci_filter_entry$",
 			"aci_imported_contract$",
 			"aci_taboo_contract$",
+			"aci_epg_to_contract$",
 
 			// Networking
 			"aci_vrf$",
 			"aci_bridge_domain$",
+			"aci_subnet$",
 			"aci_l3_outside$",
+			"aci_l3_domain_profile$",
 			"aci_external_network_instance_profile$",
 			"aci_l3_ext_subnet$",
-			"aci_logical_interface_profile$",
 			"aci_logical_node_profile$",
+			"aci_logical_interface_profile$",
+			"aci_l3out_path_attachment$",
+			"aci_logical_node_to_fabric_node$",
+			"aci_l3out_ospf_interface_profile$",
+			"aci_ospf_interface_policy$",
+			"aci_l3out_ospf_external_policy$",
 			// "aci_l3out_bfd_interface_profile$",
 			// "aci_l3out_bgp_external_policy$",
 			// "aci_l3out_bgp_protocol_profile$",
@@ -83,14 +91,15 @@ func GetProvider() *tjconfig.Provider {
 			// "aci_l3out_hsrp_interface_profile$",
 			// "aci_l3out_hsrp_secondary_vip$",
 			// "aci_l3out_loopback_interface_profile$",
-			// "aci_l3out_ospf_external_policy$",
-			// "aci_l3out_ospf_interface_profile$",
-			// "aci_l3out_path_attachment$",
+
 			// "aci_l3out_path_attachment_secondary_ip$",
 			// "aci_l3out_route_tag_policy$",
 			// "aci_l3out_static_route$",
 			// "aci_l3out_static_route_next_hop$",
 			// "aci_l3out_vpc_member$",
+			// //"aci_vmm_controller$",
+			"aci_vmm_credential$",
+			"aci_vmm_domain$",
 
 			// Access Policies
 			// "aci_access_generic$",
@@ -109,14 +118,14 @@ func GetProvider() *tjconfig.Provider {
 			// "aci_spine_switch_association$",
 			// "aci_spine_switch_policy_group$",
 
-			// "aci_l3_domain_profile$",
-
 			// "aci_cdp_interface_policy$",
 			// "aci_interface_fc_policy$",
 			// "aci_fabric_if_pol$",
 			// "aci_lacp_policy$",
 
-			// "aci_vlan_pool$",
+			"aci_ranges$",
+			"aci_vlan_pool$",
+
 			// "aci_vsan_pool$",
 			// "aci_vxlan_pool$",
 
@@ -176,7 +185,6 @@ func GetProvider() *tjconfig.Provider {
 			// "aci_endpoint_ip_aging_profile$",
 			// "aci_endpoint_loop_protection$",
 
-			// "aci_epg_to_contract$",
 			// "aci_epg_to_domain$",
 			// "aci_epg_to_static_path$",
 			// "aci_epgs_using_function$",
@@ -226,8 +234,6 @@ func GetProvider() *tjconfig.Provider {
 			// "aci_local_user$",
 			// "aci_logical_device_context$",
 			// "aci_logical_interface_context$",
-
-			// "aci_logical_node_to_fabric_node$",
 			// "aci_login_domain$",
 			// "aci_login_domain_provider$",
 			// "aci_maintenance_group_node$",
@@ -243,7 +249,7 @@ func GetProvider() *tjconfig.Provider {
 			// "aci_node_block$",
 			// "aci_node_block_firmware$",
 			// "aci_node_mgmt_epg$",
-			// "aci_ospf_interface_policy$",
+
 			// "aci_ospf_route_summarization$",
 			// "aci_ospf_timers$",
 			// "aci_physical_domain$",
@@ -253,7 +259,7 @@ func GetProvider() *tjconfig.Provider {
 			// "aci_qos_instance_policy$",
 			// "aci_radius_provider$",
 			// "aci_radius_provider_group$",
-			// "aci_ranges$",
+
 			// "aci_recurring_window$",
 			// "aci_rest$",
 			// "aci_rest_managed$",
@@ -271,7 +277,7 @@ func GetProvider() *tjconfig.Provider {
 			// "aci_spanning_tree_interface_policy$",
 
 			// "aci_static_node_mgmt_address$",
-			// "aci_subnet$",
+
 			// "aci_system$",
 
 			// "aci_tacacs_accounting$",
@@ -286,9 +292,6 @@ func GetProvider() *tjconfig.Provider {
 			// "aci_user_security_domain_role$",
 			// "aci_vlan_encapsulationfor_vxlan_traffic$",
 
-			// //"aci_vmm_controller$",
-			// "aci_vmm_credential$",
-			// "aci_vmm_domain$",
 			// "aci_vpc_domain_policy$",
 			// "aci_vpc_explicit_protection_group$",
 

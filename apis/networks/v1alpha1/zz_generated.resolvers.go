@@ -33,6 +33,22 @@ func (mg *BridgeDomain) ResolveReferences(ctx context.Context, c client.Reader) 
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RelationFvRsCtx),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.RelationFvRsCtxRef,
+		Selector:     mg.Spec.ForProvider.RelationFvRsCtxSelector,
+		To: reference.To{
+			List:    &VrfList{},
+			Managed: &Vrf{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RelationFvRsCtx")
+	}
+	mg.Spec.ForProvider.RelationFvRsCtx = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RelationFvRsCtxRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TenantDn),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.TenantDnRef,
@@ -47,6 +63,32 @@ func (mg *BridgeDomain) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	mg.Spec.ForProvider.TenantDn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TenantDnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this L3DomainProfile.
+func (mg *L3DomainProfile) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RelationInfraRsVlanNs),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.RelationInfraRsVlanNsRef,
+		Selector:     mg.Spec.ForProvider.RelationInfraRsVlanNsSelector,
+		To: reference.To{
+			List:    &VlanPoolList{},
+			Managed: &VlanPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RelationInfraRsVlanNs")
+	}
+	mg.Spec.ForProvider.RelationInfraRsVlanNs = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RelationInfraRsVlanNsRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -155,8 +197,274 @@ func (mg *L3LogicalNodeProfile) ResolveReferences(ctx context.Context, c client.
 	return nil
 }
 
+// ResolveReferences of this L3LogicalNodeToFabricNode.
+func (mg *L3LogicalNodeToFabricNode) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogicalNodeProfileDn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.LogicalNodeProfileDnRef,
+		Selector:     mg.Spec.ForProvider.LogicalNodeProfileDnSelector,
+		To: reference.To{
+			List:    &L3LogicalNodeProfileList{},
+			Managed: &L3LogicalNodeProfile{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LogicalNodeProfileDn")
+	}
+	mg.Spec.ForProvider.LogicalNodeProfileDn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogicalNodeProfileDnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this L3OspfExternalPolicy.
+func (mg *L3OspfExternalPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.L3OutsideDn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.L3OutsideDnRef,
+		Selector:     mg.Spec.ForProvider.L3OutsideDnSelector,
+		To: reference.To{
+			List:    &L3OutsideList{},
+			Managed: &L3Outside{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.L3OutsideDn")
+	}
+	mg.Spec.ForProvider.L3OutsideDn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.L3OutsideDnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this L3OspfInterfaceProfile.
+func (mg *L3OspfInterfaceProfile) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogicalInterfaceProfileDn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.LogicalInterfaceProfileDnRef,
+		Selector:     mg.Spec.ForProvider.LogicalInterfaceProfileDnSelector,
+		To: reference.To{
+			List:    &L3LogicalInterfaceProfileList{},
+			Managed: &L3LogicalInterfaceProfile{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LogicalInterfaceProfileDn")
+	}
+	mg.Spec.ForProvider.LogicalInterfaceProfileDn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogicalInterfaceProfileDnRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this L3Outside.
 func (mg *L3Outside) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RelationL3ExtRsEctx),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.RelationL3ExtRsEctxRef,
+		Selector:     mg.Spec.ForProvider.RelationL3ExtRsEctxSelector,
+		To: reference.To{
+			List:    &VrfList{},
+			Managed: &Vrf{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RelationL3ExtRsEctx")
+	}
+	mg.Spec.ForProvider.RelationL3ExtRsEctx = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RelationL3ExtRsEctxRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RelationL3ExtRsL3DomAtt),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.RelationL3ExtRsL3DomAttRef,
+		Selector:     mg.Spec.ForProvider.RelationL3ExtRsL3DomAttSelector,
+		To: reference.To{
+			List:    &L3DomainProfileList{},
+			Managed: &L3DomainProfile{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RelationL3ExtRsL3DomAtt")
+	}
+	mg.Spec.ForProvider.RelationL3ExtRsL3DomAtt = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RelationL3ExtRsL3DomAttRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TenantDn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.TenantDnRef,
+		Selector:     mg.Spec.ForProvider.TenantDnSelector,
+		To: reference.To{
+			List:    &v1alpha1.TenantList{},
+			Managed: &v1alpha1.Tenant{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TenantDn")
+	}
+	mg.Spec.ForProvider.TenantDn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TenantDnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this L3PathAttachment.
+func (mg *L3PathAttachment) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogicalInterfaceProfileDn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.LogicalInterfaceProfileDnRef,
+		Selector:     mg.Spec.ForProvider.LogicalInterfaceProfileDnSelector,
+		To: reference.To{
+			List:    &L3LogicalInterfaceProfileList{},
+			Managed: &L3LogicalInterfaceProfile{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LogicalInterfaceProfileDn")
+	}
+	mg.Spec.ForProvider.LogicalInterfaceProfileDn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogicalInterfaceProfileDnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this OspfInterfacePolicy.
+func (mg *OspfInterfacePolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TenantDn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.TenantDnRef,
+		Selector:     mg.Spec.ForProvider.TenantDnSelector,
+		To: reference.To{
+			List:    &v1alpha1.TenantList{},
+			Managed: &v1alpha1.Tenant{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TenantDn")
+	}
+	mg.Spec.ForProvider.TenantDn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TenantDnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Ranges.
+func (mg *Ranges) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VlanPoolDn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.VlanPoolDnRef,
+		Selector:     mg.Spec.ForProvider.VlanPoolDnSelector,
+		To: reference.To{
+			List:    &VlanPoolList{},
+			Managed: &VlanPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VlanPoolDn")
+	}
+	mg.Spec.ForProvider.VlanPoolDn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VlanPoolDnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Subnet.
+func (mg *Subnet) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ParentDn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ParentDnRef,
+		Selector:     mg.Spec.ForProvider.ParentDnSelector,
+		To: reference.To{
+			List:    &BridgeDomainList{},
+			Managed: &BridgeDomain{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ParentDn")
+	}
+	mg.Spec.ForProvider.ParentDn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ParentDnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this VmmCredential.
+func (mg *VmmCredential) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VmmDomainDn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.VmmDomainDnRef,
+		Selector:     mg.Spec.ForProvider.VmmDomainDnSelector,
+		To: reference.To{
+			List:    &VmmDomainList{},
+			Managed: &VmmDomain{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VmmDomainDn")
+	}
+	mg.Spec.ForProvider.VmmDomainDn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VmmDomainDnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Vrf.
+func (mg *Vrf) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse

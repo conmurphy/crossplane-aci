@@ -79,8 +79,8 @@ func main() {
 		Options: xpcontroller.Options{
 			Logger:                  log,
 			GlobalRateLimiter:       ratelimiter.NewGlobal(*maxReconcileRate),
-			PollInterval:            1 * time.Minute,
-			MaxConcurrentReconciles: 1,
+			PollInterval:            10 * time.Minute,
+			MaxConcurrentReconciles: 10,
 			Features:                &feature.Flags{},
 		},
 		Provider:       config.GetProvider(),

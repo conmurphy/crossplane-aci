@@ -124,8 +124,15 @@ type VrfParameters struct {
 	// +kubebuilder:validation:Optional
 	RelationFvRsVrfValidationPol *string `json:"relationFvRsVrfValidationPol,omitempty" tf:"relation_fv_rs_vrf_validation_pol,omitempty"`
 
-	// +kubebuilder:validation:Required
-	TenantDn *string `json:"tenantDn" tf:"tenant_dn,omitempty"`
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-jet-aci/apis/root/v1alpha1.Tenant
+	// +kubebuilder:validation:Optional
+	TenantDn *string `json:"tenantDn,omitempty" tf:"tenant_dn,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	TenantDnRef *v1.Reference `json:"tenantDnRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	TenantDnSelector *v1.Selector `json:"tenantDnSelector,omitempty" tf:"-"`
 }
 
 // VrfSpec defines the desired state of Vrf

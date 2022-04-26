@@ -28,6 +28,15 @@ func (l *BridgeDomainList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this L3DomainProfileList.
+func (l *L3DomainProfileList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this L3ExternalNetworkInstanceProfileList.
 func (l *L3ExternalNetworkInstanceProfileList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -64,8 +73,98 @@ func (l *L3LogicalNodeProfileList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this L3LogicalNodeToFabricNodeList.
+func (l *L3LogicalNodeToFabricNodeList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this L3OspfExternalPolicyList.
+func (l *L3OspfExternalPolicyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this L3OspfInterfaceProfileList.
+func (l *L3OspfInterfaceProfileList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this L3OutsideList.
 func (l *L3OutsideList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this L3PathAttachmentList.
+func (l *L3PathAttachmentList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this OspfInterfacePolicyList.
+func (l *OspfInterfacePolicyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this RangesList.
+func (l *RangesList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this SubnetList.
+func (l *SubnetList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VlanPoolList.
+func (l *VlanPoolList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VmmCredentialList.
+func (l *VmmCredentialList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VmmDomainList.
+func (l *VmmDomainList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

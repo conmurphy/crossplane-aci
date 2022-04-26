@@ -147,6 +147,48 @@ func (mg *Epg) ResolveReferences(ctx context.Context, c client.Reader) error {
 	return nil
 }
 
+// ResolveReferences of this EpgToContract.
+func (mg *EpgToContract) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationEpgDn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ApplicationEpgDnRef,
+		Selector:     mg.Spec.ForProvider.ApplicationEpgDnSelector,
+		To: reference.To{
+			List:    &EpgList{},
+			Managed: &Epg{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ApplicationEpgDn")
+	}
+	mg.Spec.ForProvider.ApplicationEpgDn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ApplicationEpgDnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContractDn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ContractDnRef,
+		Selector:     mg.Spec.ForProvider.ContractDnSelector,
+		To: reference.To{
+			List:    &ContractList{},
+			Managed: &Contract{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ContractDn")
+	}
+	mg.Spec.ForProvider.ContractDn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContractDnRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Esg.
 func (mg *Esg) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

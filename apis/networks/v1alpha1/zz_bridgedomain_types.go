@@ -115,8 +115,15 @@ type BridgeDomainParameters struct {
 	// +kubebuilder:validation:Optional
 	RelationFvRsBdToRelayP *string `json:"relationFvRsBdToRelayP,omitempty" tf:"relation_fv_rs_bd_to_relay_p,omitempty"`
 
+	// +crossplane:generate:reference:type=Vrf
 	// +kubebuilder:validation:Optional
 	RelationFvRsCtx *string `json:"relationFvRsCtx,omitempty" tf:"relation_fv_rs_ctx,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	RelationFvRsCtxRef *v1.Reference `json:"relationFvRsCtxRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	RelationFvRsCtxSelector *v1.Selector `json:"relationFvRsCtxSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	RelationFvRsIgmpsn *string `json:"relationFvRsIgmpsn,omitempty" tf:"relation_fv_rs_igmpsn,omitempty"`

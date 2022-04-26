@@ -49,14 +49,28 @@ type L3OutsideParameters struct {
 	// +kubebuilder:validation:Optional
 	RelationL3ExtRsDampeningPol []RelationL3ExtRsDampeningPolParameters `json:"relationL3ExtRsDampeningPol,omitempty" tf:"relation_l3ext_rs_dampening_pol,omitempty"`
 
+	// +crossplane:generate:reference:type=Vrf
 	// +kubebuilder:validation:Optional
 	RelationL3ExtRsEctx *string `json:"relationL3ExtRsEctx,omitempty" tf:"relation_l3ext_rs_ectx,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	RelationL3ExtRsInterleakPol *string `json:"relationL3ExtRsInterleakPol,omitempty" tf:"relation_l3ext_rs_interleak_pol,omitempty"`
+	RelationL3ExtRsEctxRef *v1.Reference `json:"relationL3ExtRsEctxRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
+	RelationL3ExtRsEctxSelector *v1.Selector `json:"relationL3ExtRsEctxSelector,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	RelationL3ExtRsInterleakPol *string `json:"relationL3ExtRsInterleakPol,omitempty" tf:"relation_l3ext_rs_interleak_pol,omitempty"`
+
+	// +crossplane:generate:reference:type=L3DomainProfile
+	// +kubebuilder:validation:Optional
 	RelationL3ExtRsL3DomAtt *string `json:"relationL3ExtRsL3DomAtt,omitempty" tf:"relation_l3ext_rs_l3_dom_att,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	RelationL3ExtRsL3DomAttRef *v1.Reference `json:"relationL3ExtRsL3DomAttRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	RelationL3ExtRsL3DomAttSelector *v1.Selector `json:"relationL3ExtRsL3DomAttSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	RelationL3ExtRsOutToBdPublicSubnetHolder []*string `json:"relationL3ExtRsOutToBdPublicSubnetHolder,omitempty" tf:"relation_l3ext_rs_out_to_bd_public_subnet_holder,omitempty"`

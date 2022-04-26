@@ -80,6 +80,17 @@ func Configure(p *config.Provider) {
 		}
 	})
 
+	p.AddResourceConfigurator("aci_epg_to_contract", func(r *config.Resource) {
+		r.ShortGroup = "applications"
+		r.Kind = "EpgToContract"
+		r.References["application_epg_dn"] = config.Reference{
+			Type: "Epg",
+		}
+		r.References["contract_dn"] = config.Reference{
+			Type: "Contract",
+		}
+	})
+
 	p.AddResourceConfigurator("aci_filter", func(r *config.Resource) {
 		r.ShortGroup = "applications"
 		r.Kind = "Filter"
