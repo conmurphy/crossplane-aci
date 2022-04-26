@@ -5,7 +5,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: vrves.networks.aci.jet.crossplane.io
+  name: vrfs.networks.aci.jet.crossplane.io
 spec:
   group: networks.aci.jet.crossplane.io
   names:
@@ -15,7 +15,7 @@ spec:
     - acijet
     kind: Vrf
     listKind: VrfList
-    plural: vrves
+    plural: vrfs
     singular: vrf
   scope: Cluster
   versions:
